@@ -9,6 +9,12 @@
 #import "HLDetailsViewController.h"
 #import "HLDetailsTopView.h"
 #import "HLDetails.h"
+#import "HLKLineDraw.h"
+#import "HLKLines.h"
+//屏幕大小
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 @interface HLDetailsViewController ()<NSXMLParserDelegate,HLDetailsTopViewDelegate>
 //上方的视图
 @property (nonatomic,strong)HLDetailsTopView *topView;
@@ -35,6 +41,12 @@ struct StockDay
     unsigned int            m_lNoUse2;  //未使用
     unsigned int            m_lNoUse3;  //未使用
 };
+//创建中间的K线视图
+@property (nonatomic,strong)HLKLineDraw *KLineView;
+//模型
+@property (nonatomic,strong)HLKLines *KLine;
+
+
 @end
 
 @implementation HLDetailsViewController
@@ -42,11 +54,22 @@ struct StockDay
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    //加载上方头部视图的xml文件信息
     [self loadData];
+    //将这个模型中的数据赋值，调用topView.t的set方法进行对控件的赋值
     self.topView.t = self.t;
+    //在视图中加入这个视图
     [self.view addSubview:self.topView];
-    
+    //调用.day文件，解析文件
     [self getStockDayData];
+    //添加中间的K线视图
+    self.KLineView.frame = CGRectMake(0, 198, SCREEN_WIDTH, 300);
+    //self.KLineView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:self.KLineView];
+    //给K线视图添加一个拖拽手势
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
+    [self.KLineView addGestureRecognizer:pan];
+    
     
     
 
@@ -71,6 +94,20 @@ struct StockDay
     }
     return _topView;
 }
+-(HLKLineDraw *)KLineView{
+    if (_KLineView == nil) {
+        _KLineView = [[HLKLineDraw alloc]init];
+    }
+    return _KLineView;
+}
+- (HLKLines *)KLine{
+    if (_KLine == nil) {
+        _KLine = [[HLKLines alloc]init];
+    }
+    return _KLine;
+}
+
+
 
 //将XML文件中的数据赋值到数组
 - (void)loadData{
@@ -226,8 +263,38 @@ BOOL ConvertPrice(int price, double *fPrice)
         
         [data getBytes:&day range:NSMakeRange(0+sizeof(day)*i, sizeof(day))];
         
+        self.KLine.open = day.m_lOpenPrice;
+        self.KLine.close = day.m_lClosePrice;
+        self.KLine.high = day.m_lMaxPrice;
+        self.KLine.low = day.m_lMinPrice;
+        self.KLine = [[HLKLines alloc]init];
+        self.KLineView.KLine = self.KLine;
+        
     }
+}
+
+#pragma mark - 手势方法
+- (void)panView:(UIPanGestureRecognizer *)pan{
+    CGPoint translation = [pan translationInView:pan.view];
     
+
+    //创建一个通知中心
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    //发送通知
+    NSString *num = [NSString stringWithFormat:@"%f",translation.x] ;
+    NSDictionary *dict=@{@"moveX":num};
+    [center postNotificationName:@"moveKLines" object:nil userInfo:dict];
+    
+    //清除移动的距离，从新的点开始计算移动距离，防止偏累加
+    [pan setTranslation:CGPointZero inView:pan.view];
     
 }
+//销毁通知
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+
 @end

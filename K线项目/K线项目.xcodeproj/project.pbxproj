@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E802A8532134DF700035BD91 /* HLKLineDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = E802A8522134DF700035BD91 /* HLKLineDraw.m */; };
+		E802A8562134E1B10035BD91 /* HLKLines.m in Sources */ = {isa = PBXBuildFile; fileRef = E802A8552134E1B10035BD91 /* HLKLines.m */; };
 		E884681B2133DD5E001C401D /* HLDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = E884681A2133DD5E001C401D /* HLDetails.m */; };
 		E884681E2133E47B001C401D /* HLDetailsTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E884681D2133E47B001C401D /* HLDetailsTopView.m */; };
 		E884682021342EAE001C401D /* 600617.day in Resources */ = {isa = PBXBuildFile; fileRef = E884681F21342EAE001C401D /* 600617.day */; };
@@ -43,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E802A8512134DF700035BD91 /* HLKLineDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLKLineDraw.h; sourceTree = "<group>"; };
+		E802A8522134DF700035BD91 /* HLKLineDraw.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HLKLineDraw.m; sourceTree = "<group>"; };
+		E802A8542134E1B10035BD91 /* HLKLines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLKLines.h; sourceTree = "<group>"; };
+		E802A8552134E1B10035BD91 /* HLKLines.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HLKLines.m; sourceTree = "<group>"; };
 		E88468192133DD5E001C401D /* HLDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLDetails.h; sourceTree = "<group>"; };
 		E884681A2133DD5E001C401D /* HLDetails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HLDetails.m; sourceTree = "<group>"; };
 		E884681C2133E47B001C401D /* HLDetailsTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLDetailsTopView.h; sourceTree = "<group>"; };
@@ -108,6 +114,8 @@
 				E892B4D7212E4E0D0056A469 /* HLTabulation.m */,
 				E88468192133DD5E001C401D /* HLDetails.h */,
 				E884681A2133DD5E001C401D /* HLDetails.m */,
+				E802A8542134E1B10035BD91 /* HLKLines.h */,
+				E802A8552134E1B10035BD91 /* HLKLines.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,6 +129,8 @@
 				E892B533212E94080056A469 /* HLTabuHeaderView.m */,
 				E884681C2133E47B001C401D /* HLDetailsTopView.h */,
 				E884681D2133E47B001C401D /* HLDetailsTopView.m */,
+				E802A8512134DF700035BD91 /* HLKLineDraw.h */,
+				E802A8522134DF700035BD91 /* HLKLineDraw.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -333,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E802A8532134DF700035BD91 /* HLKLineDraw.m in Sources */,
 				E892B4DC212E55A10056A469 /* NSArray+Log.m in Sources */,
 				E892B4D8212E4E0D0056A469 /* HLTabulation.m in Sources */,
 				E8F0464F212D9B8400501D81 /* HLTabuViewController.m in Sources */,
@@ -343,6 +354,7 @@
 				E8F0465A212D9B8500501D81 /* main.m in Sources */,
 				E8F0464C212D9B8400501D81 /* AppDelegate.m in Sources */,
 				E884681E2133E47B001C401D /* HLDetailsTopView.m in Sources */,
+				E802A8562134E1B10035BD91 /* HLKLines.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
